@@ -1,4 +1,6 @@
 import { Button } from '@/components/ui/button';
+import Image from "next/image";
+import logo from "@/app/assets/book-spine.png";
 export default function Home() {
   return (
     <div
@@ -9,8 +11,11 @@ export default function Home() {
         textAlign: 'center',
       }}
     >
-      Start prompting.
-      <Button>CLICK THIS2</Button>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+        <Image src={logo} alt="Intern Project" width={500} height={200}/>
+        <Image src={logo} alt="Intern Project" width={500} height={200}/>
+        <Image src={logo} alt="Intern Project" width={500} height={200}/>
+      </div>
     </div>
   );
 }
