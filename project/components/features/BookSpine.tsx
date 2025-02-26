@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 interface BookSpineProps {
   spineImg: string;
   coverImg: string;

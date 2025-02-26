@@ -1,12 +1,15 @@
-import { useRouter } from "next/router";
+"use client"; // Needed in App Router when using hooks
+
+import { useSearchParams } from "next/navigation";
 
 export default function BookCover() {
-  const router = useRouter();
-  const { coverImg, descriptionTxt } = router.query;
+  const searchParams = useSearchParams();
+  const coverImg = searchParams.get("coverImg");
+  const descriptionTxt = searchParams.get("descriptionTxt");
 
   return (
     <div>
-      {coverImg && <img src={coverImg as string} alt="Book Cover" />}
+      {coverImg && <img src={coverImg} alt="Book Cover" />}
       {descriptionTxt && <p>{descriptionTxt}</p>}
     </div>
   );

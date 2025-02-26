@@ -1,6 +1,4 @@
-import { Button } from '@/components/ui/button';
-import Image from "next/image";
-import logo from "@/app/assets/book-spine.png";
+import Book from "@/components/features/Book";
 export default function Home() {
   return (
     <div
@@ -19,9 +17,21 @@ export default function Home() {
         gap: '2rem',
         marginTop: '6rem',
         marginBottom: '6rem' }}>
-        <Image src={logo} alt="Intern Project" className="w-[70%]" />
-        <Image src={logo} alt="Intern Project" className="w-[70%]" />
-        <Image src={logo} alt="Intern Project" className="w-[70%]" />
+        <Book 
+          spineImg="/assets/book-spine.png"
+          coverImg="/assets/book-spine.png"
+          descriptionTxt="Hello World"
+        />
+        <Book 
+          spineImg="/assets/book-spine.png"
+          coverImg="/assets/book-spine.png"
+          descriptionTxt="Hello World"
+        />
+        <Book 
+          spineImg="/assets/book-spine.png"
+          coverImg="/assets/book-spine.png"
+          descriptionTxt="Hello World"
+        />
       </div>
     </div>
   );
