@@ -11,10 +11,17 @@ export default function Home() {
         textAlign: 'center',
       }}
     >
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-        <Image src={logo} alt="Intern Project" width={500} height={200}/>
-        <Image src={logo} alt="Intern Project" width={500} height={200}/>
-        <Image src={logo} alt="Intern Project" width={500} height={200}/>
+      
+      <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        gap: '2rem',
+        marginTop: '6rem',
+        marginBottom: '6rem' }}>
+        <Image src={logo} alt="Intern Project" className="w-[70%]" />
+        <Image src={logo} alt="Intern Project" className="w-[70%]" />
+        <Image src={logo} alt="Intern Project" className="w-[70%]" />
       </div>
     </div>
   );
