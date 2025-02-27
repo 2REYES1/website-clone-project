@@ -13,7 +13,7 @@ export default function BookCover() {
   const books = Array.from({ length: 10 }, (_, index) => ({
     spineImg: `/assets/book-spine-${index + 1}.png`,
     coverImg: `/assets/book-cover-${index + 1}.png`,
-    descriptionTxt: `Book ${index + 1}`,
+    descriptionTxt: `Book ${index + 1} Lorem ipsum dolor sit amet. Ut praesentium harum est magni assumenda et quae aliquid aut blanditiis iure cum quos corrupti et alias tenetur. Et exercitationem ratione et quia doloribus est enim maxime non voluptatem perspiciatis id galisum architecto? Sed aliquam omnis et unde officia quo itaque dolores eos fugiat quos ut cupiditate iusto a obcaecati illo ea accusamus explicabo. Aut incidunt minima est porro eius qui impedit expedita. </p><p>Ut quaerat internos et odit cumque et porro explicabo! Ut quidem tenetur sed internos nesciunt non esse exercitationem sit rerum iusto in minus voluptatem. </p><p>Et esse sunt qui enim doloribus At neque tenetur non ipsum nostrum in quia sint! Et sequi placeat ut repellendus sint sit quisquam nihil qui porro ullam qui iure dolor aut consequuntur minus est quaerat eligendi! Quo soluta laudantium aut sunt esse sit expedita suscipit in sequi eaque sed laboriosam molestiae non omnis voluptate. `,
   }));
 
   const bookRefs = books.map(() => useRef<HTMLDivElement>(null));
@@ -76,7 +76,7 @@ export default function BookCover() {
                 className="shadow-lg"
               />
             )}
-            <p className="mt-4 text-lg text-center">{book.descriptionTxt}</p>
+            <p className="mt-4 text-lg text-center p-10 m-20">{book.descriptionTxt}</p>
           </div>
         ))}
       </div>
