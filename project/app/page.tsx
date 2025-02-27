@@ -4,8 +4,8 @@ import Sidebar from "@/components/features/Sidebar";
 import Book from "@/components/features/Book";
 
 export default function Home() {
-  const books = Array.from({ length: 5 }, (_, index) => ({
-    spineImg: "/assets/book-spine.png",
+  const books = Array.from({ length: 10 }, (_, index) => ({
+    spineImg: `/assets/book-spine-${index + 1}.png`,
     coverImg: `/assets/book-cover-${index + 1}.png`,
     descriptionTxt: `Book ${index + 1}`,
   }));
