@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
 
 interface BookSpineProps {
   spineImg: string;
@@ -14,8 +17,9 @@ export default function BookSpine({ spineImg, coverImg, descriptionTxt }: BookSp
           pathname: "/book-cover",
           query: { coverImg, descriptionTxt },
         }}
+        scroll={false} // Prevents automatic scrolling
       >
-        <img src={spineImg} alt="Book Spine" className="w-full" />
+        <Image src={spineImg} alt="Book Spine" width={50} height={200} className="w-full cursor-pointer" />
       </Link>
     </div>
   );

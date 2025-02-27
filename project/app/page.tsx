@@ -5,7 +5,8 @@ import Book from "@/components/features/Book";
 
 export default function Home() {
   const books = Array.from({ length: 5 }, (_, index) => ({
-    coverImg: `/assets/book-${index + 1}.png`,
+    spineImg: "/assets/book-spine.png",
+    coverImg: `/assets/book-cover-${index + 1}.png`,
     descriptionTxt: `Book ${index + 1}`,
   }));
 
@@ -19,7 +20,7 @@ export default function Home() {
         <div className="flex flex-col items-center gap-8 mt-20 mb-12">
           {books.map((book, index) => (
             <div key={index}>
-              <Book spineImg="/assets/book-spine.png" coverImg={book.coverImg} descriptionTxt={book.descriptionTxt} />
+              <Book spineImg={book.spineImg} coverImg={book.coverImg} descriptionTxt={book.descriptionTxt} />
             </div>
           ))}
         </div>
