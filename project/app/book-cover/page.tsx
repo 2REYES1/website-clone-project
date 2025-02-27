@@ -20,7 +20,6 @@ export default function BookCover() {
 
   const [currentBookIndex, setCurrentBookIndex] = useState<number | null>(null);
 
-  // Update the current book index when the selected cover image changes
   useLayoutEffect(() => {
     if (selectedCoverImg) {
       const targetIndex = books.findIndex((book) => book.coverImg === selectedCoverImg);
@@ -28,17 +27,16 @@ export default function BookCover() {
         setCurrentBookIndex(targetIndex);
       }
     }
-  }, [selectedCoverImg]); // Re-run when selectedCoverImg changes
+  }, [selectedCoverImg]);
 
-  // Scroll to the selected book and zoom it in
   useLayoutEffect(() => {
     if (currentBookIndex !== null && bookRefs[currentBookIndex].current) {
       bookRefs[currentBookIndex].current.scrollIntoView({
         behavior: "auto",
-        block: "start",
+        block: "center",
       });
     }
-  }, [currentBookIndex]); // Scroll when currentBookIndex changes
+  }, [currentBookIndex]);
 
   return (
     <div className="flex">
@@ -46,28 +44,19 @@ export default function BookCover() {
       <Sidebar books={books} />
 
       {/* Book Cover Display */}
-      <div className="flex-1 max-w-screen-lg mx-auto p-8 flex flex-col items-center gap-8 mt-20">
+      <div className="flex-1 max-w-screen-lg mx-auto p-8 flex flex-col gap-8 mt-20">
         {books.map((book, index) => (
           <div
             key={index}
             ref={bookRefs[index]}
-            className="flex flex-col items-center"
+            className="flex items-center gap-8 flex-wrap"
           >
-            {book.coverImg === selectedCoverImg ? (
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              >
-                <Image
-                  src={book.coverImg}
-                  alt={`Book ${index + 1}`}
-                  width={300}
-                  height={450}
-                  className="shadow-lg"
-                />
-              </motion.div>
-            ) : (
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              whileHover={{ scale: 1.1 }}
+            >
               <Image
                 src={book.coverImg}
                 alt={`Book ${index + 1}`}
@@ -75,8 +64,8 @@ export default function BookCover() {
                 height={450}
                 className="shadow-lg"
               />
-            )}
-            <p className="mt-4 text-lg text-center p-10 m-20">{book.descriptionTxt}</p>
+            </motion.div>
+            <p className="text-lg text-left p-6 flex-1 min-w-[300px]">{book.descriptionTxt}</p>
           </div>
         ))}
       </div>

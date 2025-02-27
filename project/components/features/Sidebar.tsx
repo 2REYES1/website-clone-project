@@ -10,7 +10,7 @@ function Sidebar({ books }: { books: { coverImg: string; descriptionTxt: string 
   const isBookCoverPage = pathname === "/book-cover";
 
   return (
-    <div className="fixed top-0 left-0 w-[100px] h-full bg-white flex flex-col items-center p-4">
+    <div className="fixed top-0 left-0 w-[100px] h-full bg-transparent flex flex-col items-center p-4">
       {/* Logo */}
       <Image src="/assets/logo.jpg" alt="Logo" width={40} height={40} />
 
