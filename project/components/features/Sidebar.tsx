@@ -28,16 +28,14 @@ function Sidebar({ books }: { books: { coverImg: string; descriptionTxt: string 
             key={index}
             href={{
               pathname: "/book-cover",
-              query: { coverImg: book.coverImg, descriptionTxt: book.descriptionTxt },
+              query: { coverImg: book.coverImg, descriptionTxt: book.descriptionTxt }, // Pass coverImg and descriptionTxt
             }}
           >
-            <motion.button
-              className="text-xs cursor-pointer hover:font-bold"
+            <motion.div
+              className="w-[50px] h-[10px] bg-[#617D51] rounded-sm" // Small rectangular tab
               whileHover={{ scale: 1.2 }} // Zoom in on hover
               transition={{ duration: 0.3 }} // Duration of the zoom effect
-            >
-              -----
-            </motion.button>
+            />
           </Link>
         ))}
       </div>
