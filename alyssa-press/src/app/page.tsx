@@ -11,7 +11,7 @@ export default function Home() {
   }));
 
   return (
-    <main className="flex min-h-screen w-full">
+    <main className="flex min-h-screen w-full" style={{ marginTop: '150px', marginBottom: '150px' }}>
       {/* Sticky Sidebar */}
       <Sidebar books={books} />
 
