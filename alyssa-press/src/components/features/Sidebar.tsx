@@ -2,9 +2,9 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { ThreeDBook } from 'ui-library';
 
 interface Book {
   spineImg: string;
@@ -27,13 +27,11 @@ export default function Sidebar({ books }: SidebarProps) {
       {/* Sticky Logo */}
       <div className="sticky top-8 z-20 flex mb-8">
         <Link href="/">
-          <Image
-            src="/assets/logo.jpg"
-            alt="Logo"
-            width={60}
-            height={60}
-            className="w-auto h-auto"
-          />
+          <div className="w-[100px] h-[100px] relative cursor-pointer">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <ThreeDBook scale={15} />
+            </div>
+          </div>
         </Link>
       </div>
       
@@ -43,7 +41,7 @@ export default function Sidebar({ books }: SidebarProps) {
         <div className="flex flex-col gap-8">
           {isBookCoverPage && (
             <motion.button
-              onClick={() => router.back()}
+              onClick={() => router.push('/')}
               className="flex items-center p-4 pl-0"
               whileHover={{ scale: 1.1 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}

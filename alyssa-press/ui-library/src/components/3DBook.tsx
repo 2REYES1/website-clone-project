@@ -6,7 +6,7 @@ import { Canvas } from "@react-three/fiber";
 import { useGLTF, OrbitControls } from "@react-three/drei";
 import * as THREE from 'three';
 
-const ThreeDModel = () => {
+const ThreeDModel = ({ scale = 25 }) => {
   const { scene } = useGLTF("/assets/3D_Book.glb");
   const modelRef = useRef<THREE.Group>();
   const [opacity, setOpacity] = useState(0);
@@ -35,8 +35,8 @@ const ThreeDModel = () => {
     <group>
       <primitive
         ref={modelRef}
-        object={scene}
-        scale={25}
+        object={scene.clone()} // Clone the scene to avoid sharing materials
+        scale={scale}
         position={[0, 0, 0]}
         style={{ opacity }}
         rotation={[Math.PI / 2, Math.PI / 1, 0]}
@@ -45,12 +45,22 @@ const ThreeDModel = () => {
   );
 };
 
-export const ThreeDBook = () => {
+// Create a singleton renderer instance
+let rendererInstance: THREE.WebGLRenderer | null = null;
+
+export const ThreeDBook = ({ scale = 25 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     setIsLoaded(true);
+    return () => {
+      // Cleanup only if this is the last instance being unmounted
+      if (containerRef.current && !document.querySelector('canvas')) {
+        rendererInstance?.dispose();
+        rendererInstance = null;
+      }
+    };
   }, []);
 
   return (
@@ -74,12 +84,18 @@ export const ThreeDBook = () => {
           antialias: true,
           alpha: true,
           preserveDrawingBuffer: false,
-          premultipliedAlpha: true
+          premultipliedAlpha: true,
+          // Share the renderer instance
+          onCreated: ({ gl }) => {
+            if (!rendererInstance) {
+              rendererInstance = gl;
+            }
+          }
         }}
       >
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
-        <ThreeDModel />
+        <ThreeDModel scale={scale} />
         <OrbitControls 
           enableZoom={false}
           enablePan={false}
