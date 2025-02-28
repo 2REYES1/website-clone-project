@@ -8,7 +8,10 @@ interface BookProps {
 
 export default function Book({ spineImg, coverImg, descriptionTxt }: BookProps) {
   return (
-    <div style={{ width: "40vw", height: "auto" }}>
+    <div
+      className="flex justify-center items-center"
+      style={{ width: "40vw", height: "auto", margin: "0 auto" }}
+    >
       <BookSpine spineImg={spineImg} coverImg={coverImg} descriptionTxt={descriptionTxt} />
     </div>
   );

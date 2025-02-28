@@ -11,20 +11,22 @@ export default function Home() {
   }));
 
   return (
-    <div className="flex">
+    <main className="flex min-h-screen w-full">
       {/* Sticky Sidebar */}
       <Sidebar books={books} />
 
       {/* Content */}
-      <div className="flex-1 max-w-screen-lg mx-auto p-8">
-        <div className="flex flex-col items-center gap-8 mt-20 mb-12">
-          {books.map((book, index) => (
-            <div key={index}>
-              <Book spineImg={book.spineImg} coverImg={book.coverImg} descriptionTxt={book.descriptionTxt} />
-            </div>
-          ))}
+      <div className="flex-1 flex justify-center">
+        <div className="max-w-screen-lg w-full p-8">
+          <div className="flex flex-col items-center gap-8 mt-20 mb-12">
+            {books.map((book, index) => (
+              <div key={index}>
+                <Book spineImg={book.spineImg} coverImg={book.coverImg} descriptionTxt={book.descriptionTxt} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
