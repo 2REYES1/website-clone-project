@@ -7,15 +7,16 @@ interface BookSpineProps {
   spineImg: string;
   coverImg: string;
   descriptionTxt: string;
+  title: string;
 }
 
-export default function BookSpine({ spineImg, coverImg, descriptionTxt }: BookSpineProps) {
+export default function BookSpine({ spineImg, coverImg, descriptionTxt, title }: BookSpineProps) {
   return (
     <div className="transition-transform duration-300 hover:scale-110">
       <Link
         href={{
           pathname: "/book-cover",
-          query: { coverImg, descriptionTxt },
+          query: { coverImg, descriptionTxt, title },
         }}
         scroll={false} // Prevents automatic scrolling
       >

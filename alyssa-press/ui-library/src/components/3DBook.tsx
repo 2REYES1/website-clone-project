@@ -86,11 +86,11 @@ export const ThreeDBook = ({ scale = 25 }) => {
           preserveDrawingBuffer: false,
           premultipliedAlpha: true,
           // Share the renderer instance
-          onCreated: ({ gl }) => {
-            if (!rendererInstance) {
-              rendererInstance = gl;
-            }
-          }
+        //   onCreated: ({ gl }) => {
+        //     if (!rendererInstance) {
+        //       rendererInstance = gl;
+        //     }
+        //   }
         }}
       >
         <ambientLight intensity={0.5} />
