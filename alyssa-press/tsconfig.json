@@ -1,9 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false, // Changed to catch library type issues
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -19,10 +23,31 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "ui-library": ["./ui-library/src"]
-    }
+      "@/*": [
+        "./src/*"
+      ],
+      "ui-library": [
+        "./ui-library/src"
+      ]
+    },
+    "types": [
+      "node", // For Node.js globals
+      "three",
+      "@react-three/fiber", // Explicitly include Fiber types
+      "@react-three/drei" // Explicitly include Drei types
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "ui-library/**/*.ts", "ui-library/**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "ui-library/**/*.ts",
+    "ui-library/**/*.tsx",
+    "src/global.d.ts",
+    "src/types/global.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

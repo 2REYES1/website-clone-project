@@ -120,7 +120,7 @@ export default function Sidebar({ books }: SidebarProps) {
       </div>
 
       {/* Custom scrollbar styles */}
-      <style jsx global>{`
+      <style jsx-global>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }

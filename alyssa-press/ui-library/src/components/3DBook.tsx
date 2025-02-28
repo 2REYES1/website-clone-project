@@ -3,21 +3,20 @@
 
 import { useRef, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { useGLTF, OrbitControls } from "@react-three/drei";
-import * as THREE from 'three';
+import { useGLTF, OrbitControls } from "@react-three/drei"; // OrbitControls is already correct here
+import * as THREE from "three";
 
-const ThreeDModel = ({ scale = 25 }) => {
+/**
+ * This component must be rendered as a child of <Canvas> because it uses
+ * React Three Fiber elements (<group>, <primitive>).
+ */
+function BookModel({ scale = 25 }: { scale?: number }) {
   const { scene } = useGLTF("/assets/3D_Book.glb");
-  const modelRef = useRef<THREE.Group>();
-  const [opacity, setOpacity] = useState(0);
+  const modelRef = useRef<THREE.Group>(null);
 
   useEffect(() => {
-    // Fade in the model
-    const timer = setTimeout(() => setOpacity(1), 100);
-    
+    // Cleanup geometries and materials to avoid memory leaks
     return () => {
-      clearTimeout(timer);
-      // Cleanup when component unmounts
       if (modelRef.current) {
         modelRef.current.traverse((object) => {
           if (object instanceof THREE.Mesh) {
@@ -32,71 +31,57 @@ const ThreeDModel = ({ scale = 25 }) => {
   }, []);
 
   return (
-    <group>
+    <group ref={modelRef}>
       <primitive
-        ref={modelRef}
         object={scene.clone()} // Clone the scene to avoid sharing materials
-        scale={[scale, scale, scale]} 
+        scale={[scale, scale, scale]}
         position={[0, 0, 0]}
-        style={{ opacity }}
-        rotation={[Math.PI / 2, Math.PI / 1, 0]}
+        rotation={[Math.PI / 2, Math.PI, 0]}
       />
     </group>
   );
-};
+}
 
-// Create a singleton renderer instance
-let rendererInstance: THREE.WebGLRenderer | null = null;
-
-export const ThreeDBook = ({ scale = 25 }) => {
+export function ThreeDBook({ scale = 25 }: { scale?: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(true);
+    // Fade in the container after 100ms
+    const timer = setTimeout(() => setIsLoaded(true), 100);
     return () => {
-      // Cleanup only if this is the last instance being unmounted
-      if (containerRef.current && !document.querySelector('canvas')) {
-        rendererInstance?.dispose();
-        rendererInstance = null;
-      }
+      clearTimeout(timer);
     };
   }, []);
 
   return (
-    <div 
-      ref={containerRef} 
-      style={{ 
-        width: "100%", 
-        height: "100%", 
-        position: "absolute", 
-        left: 0, 
+    <div
+      ref={containerRef}
+      style={{
+        width: "100%",
+        height: "100%",
+        position: "absolute",
+        left: 0,
         top: 0,
         opacity: isLoaded ? 1 : 0,
-        transition: 'opacity 0.5s ease-in-out'
+        transition: "opacity 0.5s ease-in-out",
       }}
     >
       <Canvas
-        camera={{ position: [0, 0, 5], fov: 75}}
-        style={{ width: "100%", height: "100%", background: 'transparent' }}
-        gl={{ 
+        camera={{ position: [0, 0, 5], fov: 75 }}
+        style={{ width: "100%", height: "100%", background: "transparent" }}
+        gl={{
           powerPreference: "low-power",
           antialias: true,
           alpha: true,
           preserveDrawingBuffer: false,
           premultipliedAlpha: true,
-          // Share the renderer instance
-        //   onCreated: ({ gl }) => {
-        //     if (!rendererInstance) {
-        //       rendererInstance = gl;
-        //     }
-        //   }
         }}
       >
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
-        <ThreeDModel scale={scale} />
-        <OrbitControls 
+        <BookModel scale={scale} />
+        <OrbitControls
           enableZoom={false}
           enablePan={false}
           autoRotate
@@ -105,4 +90,4 @@ export const ThreeDBook = ({ scale = 25 }) => {
       </Canvas>
     </div>
   );
-};
+}
