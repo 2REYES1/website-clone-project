@@ -1,18 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Sidebar from "@/components/features/Sidebar";
 import { useState, useLayoutEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import { motion } from "framer-motion";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
-
-// Load the 3D Model
-function BookModel() {
-  const { scene } = useGLTF("/assets/3D_Book.glb"); // Load the GLB model
-  return <primitive object={scene} scale={1.5} />;
-}
+import { ThreeDBook } from 'ui-library';
+import { useInView } from 'react-intersection-observer';
 
 export default function BookCover() {
   const searchParams = useSearchParams();
@@ -21,7 +13,7 @@ export default function BookCover() {
   const books = Array.from({ length: 10 }, (_, index) => ({
     spineImg: `/assets/book-spine-${index + 1}.png`,
     coverImg: `/assets/book-cover-${index + 1}.png`,
-    descriptionTxt: `Book ${index + 1} Lorem ipsum dolor sit amet...`,
+    descriptionTxt: `Book ${index + 1}\n Lorem ipsum dolor sit amet...`,
   }));
 
   const bookRefs = books.map(() => useRef<HTMLDivElement>(null));
@@ -47,31 +39,38 @@ export default function BookCover() {
 
   return (
     <div className="flex flex-col items-center">
-      {/* 3D Book Model */}
-      <div className="w-full h-[400px]">
-        <Canvas camera={{ position: [0, 1, 3] }}>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[2, 2, 2]} />
-          <BookModel />
-          <OrbitControls />
-        </Canvas>
-      </div>
-
       {/* Page Content */}
-      <div className="flex w-full">
+      <div className="flex w-full m-10">
         {/* Sticky Sidebar */}
         <Sidebar books={books} />
 
         {/* Book Cover Display */}
         <div className="flex-1 max-w-screen-lg mx-auto p-8 flex flex-col gap-8 mt-20">
-          {books.map((book, index) => (
-            <div key={index} ref={bookRefs[index]} className="flex items-center gap-8 flex-wrap">
-              <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.5, ease: "easeOut" }} whileHover={{ scale: 1.1 }}>
-                <Image src={book.coverImg} alt={`Book ${index + 1}`} width={300} height={450} style={{ height: "auto" }} className="shadow-lg" />
-              </motion.div>
-              <p className="text-lg text-left p-6 flex-1 min-w-[300px]">{book.descriptionTxt}</p>
-            </div>
-          ))}
+          {books.map((book, index) => {
+            const { ref, inView } = useInView({
+              threshold: .9, // Increased threshold
+              triggerOnce: false,
+              rootMargin: "10px 0px", // Load books slightly before they come into view
+              delay: 200 // Add a small delay to ensure stable loading
+            });
+
+            return (
+              <div key={index} ref={bookRefs[index]} className="flex items-center gap-8 flex-wrap">
+                <div 
+                  ref={ref} 
+                  className="w-[300px] h-[450px] relative bg-gray-100 rounded-lg transition-opacity duration-500"
+                  style={{ 
+                    opacity: inView ? 1 : 0,
+                    transform: `scale(${inView ? 1 : 0.95})`,
+                    transition: 'opacity 0.5s ease-out, transform 0.5s ease-out'
+                  }}
+                >
+                  {inView && <ThreeDBook />}
+                </div>
+                <p className="text-lg text-left p-6 flex-1 min-w-[300px]">{book.descriptionTxt}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
