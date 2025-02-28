@@ -39,6 +39,7 @@ const ThreeDModel = () => {
         scale={10}
         position={[0, 0, 0]}
         style={{ opacity }}
+        rotation={[Math.PI / 2, Math.PI / 1, 0]} // Initial rotation in radians (X, Y, Z)
       />
     </group>
   );
@@ -66,7 +67,7 @@ export const ThreeDBook = () => {
       }}
     >
       <Canvas
-        camera={{ position: [0, 0, 3], fov: 75 }}
+        camera={{ position: [0, 0, 5], fov: 75}}
         style={{ width: "100%", height: "100%" }}
         gl={{ 
           powerPreference: "low-power",
@@ -82,6 +83,8 @@ export const ThreeDBook = () => {
           enablePan={false}
           autoRotate
           autoRotateSpeed={2}
+          
+          
         />
       </Canvas>
     </div>
