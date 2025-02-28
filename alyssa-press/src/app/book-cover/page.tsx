@@ -3,7 +3,7 @@
 import Sidebar from "@/components/features/Sidebar";
 import { useState, useLayoutEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import { ThreeDBook } from 'ui-library';
+import { ThreeDBook, Button } from 'ui-library';
 import { useInView } from 'react-intersection-observer';
 
 export default function BookCover() {
@@ -97,7 +97,9 @@ export default function BookCover() {
                       }}
                     >
                       {book.descriptionTxt}
+                      
                     </p>
+                    <Button>Read Now</Button>
                   </div>
                 </div>
               );
