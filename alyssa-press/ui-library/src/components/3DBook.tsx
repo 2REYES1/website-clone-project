@@ -36,7 +36,7 @@ const ThreeDModel = () => {
       <primitive
         ref={modelRef}
         object={scene}
-        scale={10}
+        scale={20}
         position={[0, 0, 0]}
         style={{ opacity }}
         rotation={[Math.PI / 2, Math.PI / 1, 0]} // Initial rotation in radians (X, Y, Z)
@@ -72,8 +72,10 @@ export const ThreeDBook = () => {
         gl={{ 
           powerPreference: "low-power",
           antialias: true,
-          alpha: true 
+          alpha: true, 
         }}
+        
+        
       >
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
@@ -83,8 +85,6 @@ export const ThreeDBook = () => {
           enablePan={false}
           autoRotate
           autoRotateSpeed={2}
-          
-          
         />
       </Canvas>
     </div>
