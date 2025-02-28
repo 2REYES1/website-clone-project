@@ -39,7 +39,7 @@ const ThreeDModel = () => {
         scale={20}
         position={[0, 0, 0]}
         style={{ opacity }}
-        rotation={[Math.PI / 2, Math.PI / 1, 0]} // Initial rotation in radians (X, Y, Z)
+        rotation={[Math.PI / 2, Math.PI / 1, 0]}
       />
     </group>
   );
@@ -68,14 +68,14 @@ export const ThreeDBook = () => {
     >
       <Canvas
         camera={{ position: [0, 0, 5], fov: 75}}
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%", background: 'transparent' }}
         gl={{ 
           powerPreference: "low-power",
           antialias: true,
-          alpha: true, 
+          alpha: true,
+          preserveDrawingBuffer: false,
+          premultipliedAlpha: true
         }}
-        
-        
       >
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />

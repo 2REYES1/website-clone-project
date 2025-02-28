@@ -65,7 +65,7 @@ export default function BookCover() {
                 >
                   <div 
                     ref={ref} 
-                    className="w-[180px] h-[270px] xs:w-[220px] xs:h-[330px] sm:w-[300px] sm:h-[450px] relative bg-gray-100 rounded-lg transition-opacity duration-500 shrink-0"
+                    className="w-[180px] h-[270px] xs:w-[220px] xs:h-[330px] sm:w-[300px] sm:h-[450px] relative transition-opacity duration-500 shrink-0"
                     style={{ 
                       opacity: inView ? 1 : 0,
                       transform: `scale(${inView ? 1 : 0.95})`,
