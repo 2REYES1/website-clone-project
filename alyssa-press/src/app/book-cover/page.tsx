@@ -73,7 +73,7 @@ export default function BookCover() {
                       transition: 'opacity 0.5s ease-out, transform 0.5s ease-out'
                     }}
                   >
-                    {inView && <ThreeDBook />}
+                    {inView && <ThreeDBook scale={30}/>}
                   </div>
                   <div className="w-full lg:flex-1 pl-[60px] lg:pl-12 pr-8">
                     <h1 

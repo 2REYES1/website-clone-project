@@ -36,7 +36,7 @@ const ThreeDModel = ({ scale = 25 }) => {
       <primitive
         ref={modelRef}
         object={scene.clone()} // Clone the scene to avoid sharing materials
-        scale={scale}
+        scale={[scale, scale, scale]} 
         position={[0, 0, 0]}
         style={{ opacity }}
         rotation={[Math.PI / 2, Math.PI / 1, 0]}

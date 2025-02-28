@@ -29,7 +29,7 @@ export default function Sidebar({ books }: SidebarProps) {
         <Link href="/">
           <div className="w-[100px] h-[100px] relative cursor-pointer">
             <div className="absolute inset-0 flex items-center justify-center">
-              <ThreeDBook scale={15} />
+              <ThreeDBook scale={25} />
             </div>
           </div>
         </Link>
