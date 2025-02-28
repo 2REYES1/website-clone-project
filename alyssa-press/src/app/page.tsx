@@ -6,6 +6,9 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <Button>Click me</Button>
+      <h1 className="text-3xl font-bold underline">
+      Hello world! asdfasd
+    </h1>
       <main className={styles.main}>
         <Image
           className={styles.logo}
