@@ -13,7 +13,8 @@ export default function BookCover() {
   const books = Array.from({ length: 10 }, (_, index) => ({
     spineImg: `/assets/book-spine-${index + 1}.png`,
     coverImg: `/assets/book-cover-${index + 1}.png`,
-    descriptionTxt: `Book ${index + 1}\n Lorem ipsum dolor sit amet...`,
+    title: `Book ${index + 1}`,
+    descriptionTxt: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
   }));
 
   const bookRefs = books.map(() => useRef<HTMLDivElement>(null));
@@ -75,7 +76,28 @@ export default function BookCover() {
                     {inView && <ThreeDBook />}
                   </div>
                   <div className="w-full lg:flex-1 pl-[60px] lg:pl-12 pr-8">
-                    <p className="text-base sm:text-lg text-left max-w-[500px]">{book.descriptionTxt}</p>
+                    <h1 
+                      className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 transition-all duration-700"
+                      style={{ 
+                        opacity: inView ? 1 : 0,
+                        transform: `translateY(${inView ? '0' : '20px'})`,
+                        transition: 'opacity 0.7s ease-out, transform 0.7s ease-out',
+                        transitionDelay: '0.2s'
+                      }}
+                    >
+                      {book.title}
+                    </h1>
+                    <p 
+                      className="text-base sm:text-lg text-left max-w-[500px] transition-all duration-700"
+                      style={{ 
+                        opacity: inView ? 1 : 0,
+                        transform: `translateY(${inView ? '0' : '20px'})`,
+                        transition: 'opacity 0.7s ease-out, transform 0.7s ease-out',
+                        transitionDelay: '0.4s'
+                      }}
+                    >
+                      {book.descriptionTxt}
+                    </p>
                   </div>
                 </div>
               );
