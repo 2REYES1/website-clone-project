@@ -60,12 +60,12 @@ export default function BookCover() {
                 <div 
                   key={index} 
                   ref={bookRefs[index]} 
-                  className="flex flex-col lg:flex-row items-center gap-8 px-8 md:px-12 lg:px-16"
+                  className="flex flex-col lg:flex-row items-center gap-8 px-4 sm:px-6 md:px-8 lg:px-12"
                   style={{ maxWidth: '1200px', margin: '0 auto' }}
                 >
                   <div 
                     ref={ref} 
-                    className="w-[180px] h-[270px] xs:w-[220px] xs:h-[330px] sm:w-[300px] sm:h-[450px] relative transition-opacity duration-500 shrink-0"
+                    className="w-[200px] h-[300px] xs:w-[250px] xs:h-[375px] sm:w-[300px] sm:h-[450px] md:w-[600px] md:h-[525px] relative transition-opacity duration-500 shrink-0"
                     style={{ 
                       opacity: inView ? 1 : 0,
                       transform: `scale(${inView ? 1 : 0.95})`,
@@ -74,7 +74,7 @@ export default function BookCover() {
                   >
                     {inView && <ThreeDBook />}
                   </div>
-                  <div className="w-full lg:flex-1 pl-[120px] lg:pl-8 pr-8">
+                  <div className="w-full lg:flex-1 pl-[60px] lg:pl-12 pr-8">
                     <p className="text-base sm:text-lg text-left max-w-[500px]">{book.descriptionTxt}</p>
                   </div>
                 </div>

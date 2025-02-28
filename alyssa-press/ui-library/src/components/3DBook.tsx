@@ -36,7 +36,7 @@ const ThreeDModel = () => {
       <primitive
         ref={modelRef}
         object={scene}
-        scale={20}
+        scale={25}
         position={[0, 0, 0]}
         style={{ opacity }}
         rotation={[Math.PI / 2, Math.PI / 1, 0]}
