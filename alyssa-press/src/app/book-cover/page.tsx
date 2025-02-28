@@ -5,6 +5,7 @@ import { useState, useLayoutEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { ThreeDBook, Button } from 'ui-library';
 import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
 
 export default function BookCover() {
   const searchParams = useSearchParams();
@@ -73,7 +74,7 @@ export default function BookCover() {
                       transition: 'opacity 0.5s ease-out, transform 0.5s ease-out'
                     }}
                   >
-                    {inView && <ThreeDBook scale={30}/>}
+                    {inView && <ThreeDBook scale={30}/>}  
                   </div>
                   <div className="w-full lg:flex-1 pl-[60px] lg:pl-12 pr-8">
                     <h1 
@@ -93,13 +94,22 @@ export default function BookCover() {
                         opacity: inView ? 1 : 0,
                         transform: `translateY(${inView ? '0' : '20px'})`,
                         transition: 'opacity 0.7s ease-out, transform 0.7s ease-out',
-                        transitionDelay: '0.4s'
+                        transitionDelay: '0.4s',
+                        paddingTop: '10px',
                       }}
                     >
                       {book.descriptionTxt}
-                      
                     </p>
-                    <Button>Read Now</Button>
+                    <div className="text-base sm:text-lg text-left max-w-[500px] transition-all duration-700"
+                      style={{ 
+                        opacity: inView ? 1 : 0,
+                        transform: `translateX(${inView ? '0px' : '20px'})`,
+                        transition: 'opacity 0.7s ease-out, transform 0.7s ease-out',
+                        transitionDelay: '0.4s',
+                        paddingTop: '20px',
+                      }}>
+                      <Button>Buy Now</Button>
+                    </div>
                   </div>
                 </div>
               );
