@@ -49,9 +49,9 @@ When I'm not diving deep into code, you'll likely find me on a basketball court 
 
 ## Lessons Learned & What I Gained
 
-- **Test Deployment Early**: One main takeaway from this project is to test the deployment early. As mentioned, the production build on the deployment server didn’t function the same as the development build, leading to issues with routing and linking that weren’t apparent until deployment. Due to time constraints, I couldn’t resolve these hidden bugs.
+- **Test Deployment Early**: One main takeaway from this project is to test the deployment early. As mentioned, the production build on the deployment server didn’t function the same as the development build, leading to issues with routing and linking that weren’t apparent until deployment. Due to time constraints, I couldn’t resolve some of these hidden bugs.
   
-- **Better Planning**: Another lesson learned is the importance of better planning. Researching the dependencies or node packages beforehand would have saved me time and prevented compatibility issues.
+- **Better Planning**: Another lesson learned is the importance of better planning. Researching the dependencies or node packages beforehand would have saved me time and prevented compatibility issues. You can also see in my many branches where I messed up!
 
 - **Experience with New Technologies**: Despite the challenges, I gained valuable knowledge and experience from the technologies I used:
     - **Windsurf & AI Compatibilities**: This allowed me to quickly learn and implement new features, including working with the `three.js` and `node-vibrant` packages.
