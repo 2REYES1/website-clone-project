@@ -5,15 +5,18 @@ import { useState, useLayoutEffect, useRef, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { ThreeDBook, Button } from 'ui-library';
 import { useInView } from 'react-intersection-observer';
+import {Vibrant} from 'node-vibrant/browser';  // Updated import statement
 
 function BookItem({ 
   book, 
   index, 
-  bookRef 
+  bookRef, 
+  setBackgroundColor 
 }: { 
   book: { spineImg: string; coverImg: string; title: string; descriptionTxt: string },
   index: number,
-  bookRef: { current: HTMLDivElement | null }
+  bookRef: { current: HTMLDivElement | null },
+  setBackgroundColor: (color: string) => void
 }) {
   const { ref: inViewRef, inView } = useInView({
     threshold: 0.9,
@@ -21,6 +24,20 @@ function BookItem({
     rootMargin: "10px 0px",
     delay: 200
   });
+
+  useEffect(() => {
+    if (inView) {
+      Vibrant.from(book.coverImg)
+        .getPalette()
+        .then(palette => {
+          setBackgroundColor(palette.Vibrant?.hex || '#ffffff');
+        })
+        .catch(err => {
+          console.error('Error getting palette:', err);
+          setBackgroundColor('#ffffff');
+        });
+    }
+  }, [inView, book.coverImg, setBackgroundColor]);
 
   return (
     <div 
@@ -102,6 +119,7 @@ function BookCover() {
   }, [books.length]); // Dependency on books.length to handle potential changes
 
   const [currentBookIndex, setCurrentBookIndex] = useState<number | null>(null);
+  const [backgroundColor, setBackgroundColor] = useState<string>('#ffffff');
 
   useLayoutEffect(() => {
     if (selectedCoverImg) {
@@ -122,7 +140,7 @@ function BookCover() {
   }, [currentBookIndex]);
 
   return (
-    <main className="flex min-h-screen w-full">
+    <main className="flex min-h-screen w-full" style={{ backgroundColor }}>
       <div className="fixed top-0 left-0 h-full z-10">
         <Sidebar books={books} />
       </div>
@@ -135,6 +153,7 @@ function BookCover() {
                 book={book}
                 index={index}
                 bookRef={bookRefs.current[index]}
+                setBackgroundColor={setBackgroundColor}
               />
             ))}
           </div>

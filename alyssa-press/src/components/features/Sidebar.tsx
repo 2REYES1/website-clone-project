@@ -51,7 +51,7 @@ export default function Sidebar({ books }: SidebarProps) {
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
-                stroke="#617D51"
+                stroke="#FFFFFF"
                 className="w-10 h-10"
               >
                 <path
@@ -86,7 +86,7 @@ export default function Sidebar({ books }: SidebarProps) {
                 >
                   <motion.div
                     onClick={() => router.push(`/book-cover?coverImg=${book.coverImg}`)}
-                    className="h-[12px] bg-[#617D51] rounded-sm cursor-pointer"
+                    className="h-[12px] bg-[#FFFFFF] rounded-sm cursor-pointer"
                     animate={{ 
                       width: hoveredIndex === null ? "50px" : 
                              hoveredIndex === index ? "100px" : "70px"
@@ -103,7 +103,7 @@ export default function Sidebar({ books }: SidebarProps) {
                     aria-label={`Navigate to book ${index + 1}`}
                   />
                   <motion.span
-                    className="text-sm text-[#617D51] whitespace-nowrap"
+                    className="text-sm text-[#FFFFFF] whitespace-nowrap"
                     animate={{
                       opacity: hoveredIndex === index ? 1 : 0,
                       x: hoveredIndex === index ? 0 : -10
