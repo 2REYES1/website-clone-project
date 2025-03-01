@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@react-three/drei": "^10.0.3",
-    "@react-three/fiber": "^9.0.4",
+    "@react-three/fiber": "^9.0.0-rc.10",
     "@tailwindcss/postcss": "^4.0.9",
     "framer-motion": "^12.4.7",
     "next": "15.2.0",
@@ -26,6 +26,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.174.0",
     "eslint": "^9",
     "eslint-config-next": "15.2.0",
     "typescript": "^5"

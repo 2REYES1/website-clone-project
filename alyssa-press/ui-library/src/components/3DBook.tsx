@@ -1,15 +1,19 @@
-// components/3DBook.tsx
-"use client";
-
 import { useRef, useEffect, useState } from "react";
-import { Canvas } from "@react-three/fiber";
-import { useGLTF, OrbitControls } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useGLTF } from "@react-three/drei";
 import * as THREE from 'three';
 
 const ThreeDModel = ({ scale = 25 }) => {
   const { scene } = useGLTF("/assets/3D_Book.glb");
   const modelRef = useRef<THREE.Group>();
   const [opacity, setOpacity] = useState(0);
+
+  // Automatic rotation logic
+  useFrame(() => {
+    if (modelRef.current) {
+      modelRef.current.rotation.y += 0.01;  // Adjust rotation speed here
+    }
+  });
 
   useEffect(() => {
     // Fade in the model
@@ -45,9 +49,7 @@ const ThreeDModel = ({ scale = 25 }) => {
   );
 };
 
-// Create a singleton renderer instance
-let rendererInstance: THREE.WebGLRenderer | null = null;
-
+// Main component
 export const ThreeDBook = ({ scale = 25 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -57,8 +59,7 @@ export const ThreeDBook = ({ scale = 25 }) => {
     return () => {
       // Cleanup only if this is the last instance being unmounted
       if (containerRef.current && !document.querySelector('canvas')) {
-        rendererInstance?.dispose();
-        rendererInstance = null;
+        // Perform cleanup actions if necessary
       }
     };
   }, []);
@@ -77,31 +78,12 @@ export const ThreeDBook = ({ scale = 25 }) => {
       }}
     >
       <Canvas
-        camera={{ position: [0, 0, 5], fov: 75}}
+        camera={{ position: [0, 0, 5], fov: 75 }}
         style={{ width: "100%", height: "100%", background: 'transparent' }}
-        gl={{ 
-          powerPreference: "low-power",
-          antialias: true,
-          alpha: true,
-          preserveDrawingBuffer: false,
-          premultipliedAlpha: true,
-          // Share the renderer instance
-        //   onCreated: ({ gl }) => {
-        //     if (!rendererInstance) {
-        //       rendererInstance = gl;
-        //     }
-        //   }
-        }}
       >
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
         <ThreeDModel scale={scale} />
-        <OrbitControls 
-          enableZoom={false}
-          enablePan={false}
-          autoRotate
-          autoRotateSpeed={2}
-        />
       </Canvas>
     </div>
   );

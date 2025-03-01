@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
     config.resolve.modules.push(path.resolve(__dirname, 'ui-library/dist'));
     return config;
   },
+  transpilePackages: ['three'],  // Add this line to transpile the three package
 };
 
 export default nextConfig;
